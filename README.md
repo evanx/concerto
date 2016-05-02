@@ -4,18 +4,18 @@
 Simple git-based PKI with goals:
 - enable a minimal secure service API implementation
 - use client-side SSL certs for authentication and authorisation
-- support self-signed certs 
+- support self-signed certs
 
 
 The API user must:
 - generate a private key and self-signed public certificate e.g. using `openssl`
 - create a git repo for client certs e.g. `github.com/USER/certs-concerto`
-- commit the PEM file of the authorized cert to that git repo 
-- provide a cert manifest file for a given API 
+- commit the PEM file of the authorized cert to that git repo
+- provide a cert manifest file for a given API
 
 <img src="https://evanx.github.io/images/rquery/concerto-repo.png">
 
-See example repo: `https://github.com/evanx/certs-concerto` as follows:
+See example repo: https://github.com/evanx/certs-concerto
 
 The repo contains a `redishub_authorized_certs.cson` manifest:
 ```yaml
@@ -24,9 +24,9 @@ certs: [
   'eowyn-evans-2016-05-01-21h38-36s.cert.pem'
 ]
 ```
-where this lists active certs stored in the repo in PEM format. 
+where this lists active certs stored in the repo in PEM format.
 
-We generate a cert file using `openssl rsa` via the `concerto` bash script. 
+We generate a cert file using `openssl rsa` via the `concerto` bash script.
 ```shell
 evans@eowyn:~/concerto$ bin/concerto gen
 ```
@@ -36,9 +36,9 @@ writing new private key to 'eowyn-evans-2016-05-02-04h55-22s.privkey.pem'
         Issuer: CN=eowyn-evans-2016-05-02-04h55-22s
         Subject: CN=eowyn-evans-2016-05-02-04h55-22s
 ```
-where the issuer and subject are the same since it is self-signed. 
+where the issuer and subject are the same since it is self-signed.
 
-Note that a default cert `id` is chosen according the hostname, user and timestamp. This `CN` is defaulted to this `id.` Since we might prefer this information to be private. Therefore private repos must be supported, with access granted to the service's ssh key. 
+Note that a default cert `id` is chosen according the hostname, user and timestamp. This `CN` is defaulted to this `id.` Since we might prefer this information to be private. Therefore private repos must be supported, with access granted to the service's ssh key.
 
 See the `bin/concerto` bash util script:
 https://github.com/evanx/concerto/blob/master/bin/concerto
@@ -71,7 +71,7 @@ Benefits:
 Costs:
 - requiring the cert repo creates signup friction
 - does not support a customer notification mechanism via verified email
-- requires a Github account 
+- requires a Github account
 
 The costs must be mitigated as follows:
 - enable users to try the service using a simpler token-based access scheme
@@ -86,4 +86,3 @@ In the future, we will implement a cert registry service to replace the git-base
 #### Related
 
 https://github.com/evanx/rquery
-
