@@ -2,15 +2,13 @@
 ## concerto
 
 Simple git-based PKI with goals:
-- enable a minimal secure service API implementation
-- use client-side SSL certs for authentication and authorisation
-- support self-signed certs
-
+- enable a minimal secure API implementation
+- use self-signed client SSL certs for authentication and authorisation
 
 The API user must:
 - generate a private key and self-signed public certificate e.g. using `openssl`
 - create a git repo for client certs e.g. `github.com/USER/certs-concerto`
-- commit the PEM file of the authorized cert to that git repo
+- commit the PEM file of authorized certs to that git repo
 - provide a cert manifest file for a given API
 
 <img src="https://evanx.github.io/images/rquery/concerto-repo.png">
@@ -26,7 +24,7 @@ certs: [
 ```
 where this lists active certs stored in the repo in PEM format.
 
-We generate a cert file using `openssl rsa` via the `concerto` bash script.
+We generate a cert file using `openssl` e.g. via the `concerto` bash script:
 ```shell
 evans@eowyn:~/concerto$ bin/concerto gen
 ```

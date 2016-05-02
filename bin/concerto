@@ -8,7 +8,7 @@ client=${client:=redishub}
 client_authorized_certs=${client}_authorized_certs
 
 . bin/_${client}.sh
-. bin/_util.sh 
+. bin/_util.sh
 
 # commands
 
@@ -471,6 +471,6 @@ then
    shift
 fi
 [ -t 1 ] && echo -e "${cLightGray}${sBold}command: $command ${@}${sReset}"
-c$#$command $@ || c0help
+c$#$command $@; echo $? # || c0help
 
 #echo
