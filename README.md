@@ -4,7 +4,7 @@
 Simple git-based PKI where an API user must:
 - create a git repo for client certs e.g. `github.com/USER/certs-concerto`
 - use `openssl` to generate a private key and self-signed public certificate
-- commit authorized certs to git repo e.g. `certs-concerto`
+- commit authorized certs to that git repo e.g. `certs-concerto`
 - provide a manifest file of active certs e.g. `SERVICE_authorized_certs.cson`
 
 To authenticate access, API service is configured with:
