@@ -14,11 +14,9 @@ See example repo: `https://github.com/evanx/certs-concerto` as follows:
 Rhe repo contains a `redishub_authorized_certs.cson` manifest:
 ```yaml
 spec: 'concerto/manifest#0.2.0'
-certs: 
-  'eowyn-evans-2016-05-01-21h38-36s.cert.pem': 
-    role: 'admin'
-  'eomer-evans-2016-05-01-21h58-45s.cert.pem': 
-    role: 'readonly'
+certs: [
+  'eowyn-evans-2016-05-01-21h38-36s.cert.pem'
+]
 ```
 where this lists active certs stored in the repo in PEM format. 
 
@@ -34,7 +32,7 @@ writing new private key to 'eowyn-evans-2016-05-02-04h55-22s.privkey.pem'
 ```
 where the issuer and subject are the same since it is self-signed. 
 
-Note that a default cert `id` is chosen according the hostname, user and timestamp. This `CN` is defaulted to this `id.` Since we might prefer this information to be private, private repos must be supported, with access granted to the service's ssh key. 
+Note that a default cert `id` is chosen according the hostname, user and timestamp. This `CN` is defaulted to this `id.` Since we might prefer this information to be private. Therefore private repos must be supported, with access granted to the service's ssh key. 
 
 To authenticate API access authorized by a specific Github user, the API service must know:
 - the repo host and user e.g. github.com and the Github user
