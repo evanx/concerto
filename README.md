@@ -6,8 +6,6 @@ A light-weight API authentication scheme where an API user must:
 - use `openssl` to generate a private key and self-signed public certificate
 - commit authorized certs to git repo e.g. `certs-concerto`
 - provide a manifest file of active certs e.g. `SERVICE_authorized_certs.cson`
-- the service provides a endpoint to import or refresh authorized certs e.g. `/importcerts`
-- otherwise the service authenticates HTTPS requests according to the authorized certs
 
 To authenticate access, API service is configured with:
 - the repo host e.g. github.com
@@ -15,11 +13,13 @@ To authenticate access, API service is configured with:
 - a well-known name of the certs repo e.g. `certs-concerto`
 - a well-known name of the authorized certs e.g. `redishub_authorized_certs.cson`
 
-When the contents of the certs repo are modified:
-- a webhook endpoint provided by the service is invoked e.g. `/importcerts`
-- the service will then sync the certs
+The API service:
+- provides a endpoint to import or refresh authorized certs e.g. `/importcerts`
+- otherwise the service authenticates HTTPS requests according to the committed certs
 
-Requests are authenticated
+When the contents of the certs repo are modified:
+- the user requests the service to import/refresh certs e.g. `/importcerts`
+- the service will then sync the certs from the git repo to its own cache
 
 
 #### Example
