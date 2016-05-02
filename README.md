@@ -54,17 +54,24 @@ Notes:
 - if a private repo, then add the service's public ssh key as a deployment key
 
 Benefits:
-- enable secure API access via client SSL authentication
-- avoid passwords and the usual email verification for lost password recovery
+- enables secure API access via client SSL authentication
+- avoids passwords and the usual email verification for lost password recovery
+- enables a minimal service implementation with secure access
 - the same `certs-concerto` repo could include manifest files for different API services
 
 Costs:
 - requiring the cert repo creates signup friction
-- does not provide a customer messaging mechanism via verified email
+- does not support a customer notification mechanism via verified email
+- requires a Github account 
 
 The costs must be mitigated as follows:
-- enable users to try the service using a less onerous token-based access scheme
+- enable users to try the service using a simpler token-based access scheme
 - provide a utility to ease cert generation and enrollment for SSL authentication
+- support HTTP-based customer notification e.g. via Slack, Telegram
+
+In the future, we will implement a cert registry service to replace the git-based repo:
+- enable an account to be registered with auto-enrollment of the original client cert
+- add/update certs to the registry via HTTP POST with an authorised "admin" cert
 
 
 #### Related
