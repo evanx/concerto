@@ -7,21 +7,20 @@ Simple git-based PKI where an API user must:
 - commit the PEM file of the authorized cert to that git repo 
 - provide a cert manifest file for a given API 
 
+<img src="https://evanx.github.io/images/rquery/concerto-repo.png">
+
 See example repo: `https://github.com/evanx/certs-concerto` as follows:
 
-```shell
-evans@eowyn:~/certs-concerto$ ls -C1
-redishub_authorized_certs.cson
-eowyn-evans-2016-05-01-21h38-36s.cert.pem
-```
-where the repo contains a `redishub_authorized_certs.cson` manifest:
+Rhe repo contains a `redishub_authorized_certs.cson` manifest:
 ```yaml
 spec: 'concerto/manifest#0.2.0'
-certs: {
-  'eowyn-evans-2016-05-01-21h38-36s.cert.pem': { role: 'admin' }
-}
+certs: 
+  'eowyn-evans-2016-05-01-21h38-36s.cert.pem': 
+    role: 'admin'
+  'eomer-evans-2016-05-01-21h58-45s.cert.pem': 
+    role: 'readonly'
 ```
-where this lists active certs stored in the repo in PEM format. By default a cert `id` is generated from the hostname, user and timestamp. However we would prefer even this information to be private, and so the service should support private repos e.g. on Bitbucket and Gitlab.
+where this lists active certs stored in the repo in PEM format. 
 
 We generate a cert file using `openssl rsa` via the `concerto` bash script. 
 ```shell
@@ -33,21 +32,9 @@ writing new private key to 'eowyn-evans-2016-05-02-04h55-22s.privkey.pem'
         Issuer: CN=eowyn-evans-2016-05-02-04h55-22s
         Subject: CN=eowyn-evans-2016-05-02-04h55-22s
 ```
-where `concerto gen` uses `openssl req` as follows:
-  openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -subj "$subj" -out $id.cert.pem -keyout $id.privkey.pem
-  cat $id.cert.pem $id.privkey.pem > $id.privcert.pem
-```
-Finally it checks the cert PEM subject:
-```
-openssl x509 -text -in $id.cert.pem | grep 'CN='
-
-      Issuer: CN=eowyn-evans-2016-05-01-21h38-36s
-      Subject: CN=eowyn-evans-2016-05-01-21h38-36s
-```
 where the issuer and subject are the same since it is self-signed. 
 
-Note that a default cert `id` is chosen according the hostname, user and timestamp. This `CN` is defaulted to this `id.`
+Note that a default cert `id` is chosen according the hostname, user and timestamp. This `CN` is defaulted to this `id.` Since we might prefer this information to be private, private repos must be supported, with access granted to the service's ssh key. 
 
 To authenticate API access authorized by a specific Github user, the API service must know:
 - the repo host and user e.g. github.com and the Github user

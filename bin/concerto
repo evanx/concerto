@@ -6,19 +6,10 @@ concerto=$0
 
 # supported clients
 
-client_redishub() {
-  home=${home:=$HOME}
-  priv=${priv:=$home/.redishub}
-  repoName=${repoName:=certs-concerto}
-  repo=${repo:=$home/$repoName}
-  rapi="http://clisecure.redishub.com"
-  help='https://github.com/evanx/concerto-bash/blob/master/README.md'
-}
-
 client=${client:=redishub}
-client_$client
-
 client_authorized_certs=${client}_authorized_certs
+
+. bin/_${client}.sh 
 
 # bash echo styles and colors
 
