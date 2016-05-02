@@ -34,6 +34,9 @@ where the issuer and subject are the same since it is self-signed.
 
 Note that a default cert `id` is chosen according the hostname, user and timestamp. This `CN` is defaulted to this `id.` Since we might prefer this information to be private. Therefore private repos must be supported, with access granted to the service's ssh key. 
 
+See the `bin/concerto` bash util script:
+- https://github.com/evanx/concerto/blob/master/bin/concerto
+
 To authenticate API access authorized by a specific Github user, the API service must know:
 - the repo host and user e.g. github.com and the Github user
 - the name of the certs repo e.g. `certs-concerto`
@@ -76,4 +79,8 @@ In the future, we will implement a cert registry service to replace the git-base
 
 #### Related
 
-Bash util script: https://github.com/evanx/concerto-bash
+
+# Related work
+
+https://github.com/evanx/rquery
+
