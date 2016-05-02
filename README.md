@@ -1,7 +1,13 @@
 
 ## concerto
 
-Simple git-based PKI where an API user must:
+Simple git-based PKI with goals:
+- enable a minimal secure service API implementation
+- use client-side SSL certs for authentication and authorisation
+- support self-signed certs 
+
+
+The API user must:
 - generate a private key and self-signed public certificate e.g. using `openssl`
 - create a git repo for client certs e.g. `github.com/USER/certs-concerto`
 - commit the PEM file of the authorized cert to that git repo 
@@ -11,7 +17,7 @@ Simple git-based PKI where an API user must:
 
 See example repo: `https://github.com/evanx/certs-concerto` as follows:
 
-Rhe repo contains a `redishub_authorized_certs.cson` manifest:
+The repo contains a `redishub_authorized_certs.cson` manifest:
 ```yaml
 spec: 'concerto/manifest#0.2.0'
 certs: [
