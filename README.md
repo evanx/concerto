@@ -79,8 +79,5 @@ In the future, we will implement a cert registry service to replace the git-base
 
 #### Related
 
-
-# Related work
-
 https://github.com/evanx/rquery
 
