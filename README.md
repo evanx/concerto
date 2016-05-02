@@ -41,6 +41,8 @@ Note that a default cert `id` is chosen according the hostname, user and timesta
 See the `bin/concerto` bash util script:
 https://github.com/evanx/concerto/blob/master/bin/concerto
 
+<img src="https://evanx.github.io/images/rquery/concerto-help.png">
+
 To authenticate API access authorized by a specific Github user, the API service must know:
 - the repo host and user e.g. github.com and the Github user
 - the name of the certs repo e.g. `certs-concerto`

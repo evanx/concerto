@@ -10,6 +10,29 @@ client_authorized_certs=${client}_authorized_certs
 . bin/_${client}.sh
 . bin/_util.sh
 
+# prepare $archive dir for today
+
+archive=$priv/tmp/archive/`date +%Y%m%d`
+mkdir -p $archive
+#mv -f $priv/tmp/* $archive/. 2> /dev/null || true
+
+# prepare $id defaulted to HOST-USER-DATE-TIME
+
+user=${user:=none}
+if [ -f $priv/github.user ]
+then
+   user=`cat $priv/github.user`
+   [ -t 1 ] && echo -e "${cDarkGray}github user: ${cDarkGray}${sBold}$user${sReset}"
+fi
+
+id=${id:=`hostname -s`-$USER-`date +'%Y-%m-%d-%Hh%M-%Ss'`}
+last=none
+if [ -f $priv/latest.id ]
+then
+  last=`cat $priv/latest.id`
+  [ -t 1 ] && echo -e "${cDarkGray}last cert gen id: ${cDarkGray}${sBold}${last}${sReset}"
+fi
+
 # commands
 
 c0gen() { # generate a timestamped cert in $priv/tmp
@@ -429,6 +452,10 @@ c0show() {
    fi
 }
 
+helpl() {
+  echo -e "  $1 ${ec}$2${er}" | sed "s/\/home\/$USER\///g"
+}
+
 c0help() {
    ec=''
    er=''
@@ -440,18 +467,18 @@ c0help() {
       er=${cNormal}${sReset}
    fi
    headline "Usage: see $help"
-   echo -e "  show ${ec}# show state of $priv ${er}"
-   echo -e "  gen ${ec}# generate a timestamped cert in $priv/tmp ${er}"
-   echo -e "  id ${ec}# show $priv/latest.id for last generated cert ${er}"
-   echo -e "  deploy ID ${ec}# copy generated cert files to $priv ${er}"
-   echo -e "  archive ${ec}# move contents of $priv to $priv/tmp/archive ${er}"
-   echo -e "  ghshow ${ec}# show state of $repo ${er}"
-   echo -e "  ghinit USER ID ${ec}# initialise $repo with generated cert ${er}"
-   echo -e "  ghclone USER ${ec}# git clone $repo ${er}"
-   echo -e "  ghpull ${ec}# git pull $repo ${er}"
-   echo -e "  ghcommit MESSAGE ${ec}# git add, commit, push $repo ${er}"
-   echo -e "  ghadd ID ${ec}# copy generated cert to $repo ${er}"
-   echo -e "  ghuser USER ${ec}# save Github.com user in $priv/github.user ${er}"
+   helpl "show" "show state of $priv"
+   helpl "gen" "generate a timestamped cert in $priv/tmp"
+   helpl "id" "show $priv/latest.id for last generated cert"
+   helpl "deploy ID" "copy generated cert files to $priv"
+   helpl "archive" "move contents of $priv to $priv/tmp/archive"
+   helpl "ghshow" "show state of $repo"
+   helpl "ghinit USER ID" "initialise $repo with generated cert"
+   helpl "ghclone USER" "git clone $repo"
+   helpl "ghpull" "git pull $repo"
+   helpl "ghcommit MESSAGE" "git add, commit, push $repo"
+   helpl "ghadd ID" "copy generated cert to $repo"
+   helpl "ghuser USER" "save Github.com user in $priv/github.user"
 }
 
 c0danger1() {
@@ -471,6 +498,6 @@ then
    shift
 fi
 [ -t 1 ] && echo -e "${cLightGray}${sBold}command: $command ${@}${sReset}"
-c$#$command $@; echo $? # || c0help
+c$#$command $@ || c0help
 
 #echo
