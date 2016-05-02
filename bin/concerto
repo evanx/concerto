@@ -478,7 +478,6 @@ c0help() {
    helpl "ghpull" "git pull $repo"
    helpl "ghcommit MESSAGE" "git add, commit, push $repo"
    helpl "ghadd ID" "copy generated cert to $repo"
-   helpl "ghuser USER" "save Github.com user in $priv/github.user"
 }
 
 c0danger1() {
