@@ -453,7 +453,7 @@ c0show() {
 }
 
 helpl() {
-  echo -e "  $1 ${ec}$2${er}" | sed "s/\/home\/$USER\///g"
+  echo -e "  $1 ${ec}# $2${er}" | sed "s/\/home\/$USER\///g"
 }
 
 c0help() {
