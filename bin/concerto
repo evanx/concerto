@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ -z "$BASH" ]
+then
+  >&2 echo "Unsupported shell. Please use bash shell."
+  exit 1
+fi
+
 set -u -e
 
 concerto=$0
@@ -239,6 +245,13 @@ c1ghinit() {
    c2ghinit $user $id
 }
 
+c0ghinit() {
+   carg $# ghinit 
+   [ -f $priv/github.user ] || abort "Not found: $priv/github.user" "$concerto ghuser USER"
+   [ -f $priv/latest.id ] || abort "Latest cert gen ID not found: $priv/latest.id" "$concerto gen"
+   c2ghinit `cat $priv/github.user` `cat $priv/latest.id`
+}
+
 c1ghinitforce() {
    carg $# ghinitforce user
    if [ -d $archive/$repoName ]
@@ -354,6 +367,10 @@ c1ghuser() {
   echo "$1" > $priv/github.user
   headline "Github user saved in $priv/github.user"
   cat $priv/github.user
+}
+
+c0ghuser() {
+  abort "Specify the Github.com user hosting 'certs-concerto' repo"
 }
 
 c0ghshow() {
