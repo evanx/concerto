@@ -352,7 +352,7 @@ c1ghcommit() {
 
 c0ghcommit() {
    carg $# ghcommit #
-   [ -f $priv/latest.id ] && abort "No last id, try 'gen'"
+   [ ! -f $priv/latest.id ] && abort "No last id, try 'gen'"
    id=`cat $priv/latest.id`
    info "Taking latest ID $id from $priv/latest.id as the git commit message"
    message=$id
