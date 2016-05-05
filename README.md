@@ -5,6 +5,7 @@ Simple git-based PKI with goals:
 - enable a minimal secure API implementation
 - use self-signed client SSL certs for authentication
 
+
 ### User story
 
 Say you want to build a cloud-based foundational API, without any bells and whistles. The minimal requirement for the API is that you can use it youself to build apps. You probably want to show it to your friends and colleagues, and let them "signup" to try it out and give you some feedback.
@@ -117,10 +118,12 @@ The costs must be mitigated as follows:
 
 ### Future plans
 
-We might implement a cert registry service to replace the git-based repo:
+We wish to implement a cert registry service using Redis to:
 - enable an account to be registered with auto-enrollment of the original client cert
 - add/update certs to the registry via HTTP POST with an authorised "admin" cert
 
+For earlier work along these lines, see:
+https://github.com/evanx/certserver
 
 #### Related
 

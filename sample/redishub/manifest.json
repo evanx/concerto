@@ -1,0 +1,15 @@
+{
+   "spec": "redishub/manifest#0.3.0",
+   "permissions": {
+      "admin": [
+         {
+            "resource": {
+               "regexp": ".*"
+            },
+            "allow": [
+               "all-actions"
+            ]
+         }
+      ]
+   }
+}
