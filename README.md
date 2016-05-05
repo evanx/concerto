@@ -1,5 +1,5 @@
 
-## concerto
+# concerto
 
 Simple git-based PKI with goals:
 - enable a minimal secure API implementation
