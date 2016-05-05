@@ -5,7 +5,9 @@ Simple git-based PKI with goals:
 - enable a minimal secure API implementation
 - use self-signed client SSL certs for authentication
 
-Say you want to build a cloud-based foundational API, without any bells and whistles. The minimal requirement for the API is that you can use it youself to build apps. You probably want to show it to your friends and colleagues, and let them "signup" to try it and give you some feedback.
+### User story
+
+Say you want to build a cloud-based foundational API, without any bells and whistles. The minimal requirement for the API is that you can use it youself to build apps. You probably want to show it to your friends and colleagues, and let them "signup" to try it out and give you some feedback.
 
 Months later, you might decide that you want to launch it professionally by building a website with signup, OAuth, email verification, password recovery etc.
 
