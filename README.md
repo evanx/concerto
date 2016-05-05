@@ -32,11 +32,15 @@ The repo contains a manifest for my `redishub` service:
 ```json
 {
    "spec": "redishub/manifest#0.3.0",
-   "rolePermissions": {
+   "permissions": {
       "admin": [
          {
-            "resource": {"regexp": ".*"},
-            "accessLevel": "admin"
+            "resource": {
+               "regexp": ".*"
+            },
+            "allow": [
+               "all-actions"
+            ]
          }
       ]
    }
