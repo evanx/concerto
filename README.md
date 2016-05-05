@@ -11,20 +11,20 @@ Say you want to build a cloud-based foundational API, without any bells and whis
 
 Months later, you might decide that you want to launch it professionally by building a website with signup, OAuth, email verification, password recovery etc.
 
-With Concerto, you can avoid all that overhead at least initially, to build a "minimum viable" API implementation, that doesn't compromise on security. It does create some enrollment friction, e.g. creating client certs, and committing them to an authorized certs repo. But for you and some other technical people, that's not a show-stopper.
+With Concerto, you can avoid all that overhead at least initially, to build a "minimum viable" API implementation, that most importantly doesn't compromise on security. It does create some enrollment friction, e.g. creating client certs, and committing them to an authorized certs repo. But for you and some other technical people, that's not a show-stopper.
 
 An API user must:
 - generate a private key and self-signed public certificate e.g. using `openssl`
 - create a git repo for client certs e.g. `github.com/GHUSER/certs-concerto`
 - commit the PEM file of authorized certs to that git repo
 - provide a manifest file for a given API e.g. `redishub/manifest.json`
-- in the manifest, specify a role-based access permissions e.g. `admin` role has read-write access to all resources
+- in the manifest, specify a role-based access permissions e.g. the `admin` role has full access
 - provide a list of certs for each role e.g. `admin.txt`
+
+<img src="https://evanx.github.io/images/rquery/concerto-repo.png">
 
 
 ### Certs repo
-
-<img src="https://evanx.github.io/images/rquery/concerto-repo.png">
 
 See example repo: https://github.com/evanx/certs-concerto
 
