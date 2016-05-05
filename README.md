@@ -33,12 +33,15 @@ The repo contains a manifest for my `redishub` service:
 {
    "spec": "redishub/manifest#0.3.0",
    "rolePermissions": {
-      "admin": [{
-          "resource": {"regexp": ".*"},
-          "accessLevel": "admin"
-      }]
+      "admin": [
+         {
+            "resource": {"regexp": ".*"},
+            "accessLevel": "admin"
+         }
+      ]
    }
-}```
+}
+```
 where this declares permissions for roles, e.g. for `admin` role.
 
 The certs with the admin role are listed in `admin.txt` as follows:
