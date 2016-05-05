@@ -123,7 +123,6 @@ The costs should be mitigated as follows:
 
 - support private repos
 
-
 ### Future plans
 
 We wish to implement a cert registry service using Redis to:
