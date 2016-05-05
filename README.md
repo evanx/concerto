@@ -113,10 +113,15 @@ Costs:
 - does not support a customer notification mechanism via verified email
 - requires a Github account
 
-The costs must be mitigated as follows:
+The costs should be mitigated as follows:
 - enable users to try the service using a simpler token-based access scheme
 - provide a utility to ease cert generation and enrollment for SSL authentication
 - support HTTP-based customer notification e.g. via Slack, Telegram
+
+
+### TODO
+
+- support private repos
 
 
 ### Future plans
