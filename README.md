@@ -24,6 +24,8 @@ An API user must:
 
 ### Certs repo
 
+<img src="https://evanx.github.io/images/rquery/concerto-repo.png">
+
 See example repo: https://github.com/evanx/certs-concerto
 
 The repo contains a manifest for my `redishub` service:
@@ -60,8 +62,6 @@ writing new private key to 'eowyn-evans-2016-05-02-04h55-22s.privkey.pem'
 where the issuer and subject are the same since it is self-signed.
 
 Note that a default cert `id` is chosen according the hostname, user and timestamp. This `CN` is defaulted to this `id.` Since we might prefer this information to be private. Therefore private repos must be supported, with access granted to the service's ssh key.
-
-<img src="https://evanx.github.io/images/rquery/concerto-repo.png">
 
 See the `bin/concerto` bash util script:
 https://github.com/evanx/concerto/blob/master/bin/concerto
