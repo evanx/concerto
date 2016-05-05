@@ -49,6 +49,9 @@ The repo contains a manifest for my `redishub` service:
 ```
 where this declares permissions for roles, e.g. for `admin` role.
 
+Find an empty sample manifest at:
+https://github.com/evanx/concerto/blob/master/sample/redishub/manifest.json
+
 The certs with the admin role are listed in `admin.txt` as follows:
 ```
 eowyn-evans-2016-05-01-21h38-36s.cert.pem
