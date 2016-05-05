@@ -3,26 +3,49 @@
 
 Simple git-based PKI with goals:
 - enable a minimal secure API implementation
-- use self-signed client SSL certs for authentication and authorisation
+- use self-signed client SSL certs for authentication
 
-The API user must:
+Say you want to build a cloud-based foundational API, without any bells and whistles. The minimal requirement for the API is that you can use it youself to build apps. You probably want to show it to your friends and colleagues, and let them "signup" to try it and give you some feedback.
+
+Months later, you might decide that you want to launch it professionally by building a website with signup, OAuth, email verification, password recovery etc.
+
+With Concerto, you can avoid all that overhead at least initially, to build a "minimum viable" API implementation, that doesn't compromise on security. It does create some enrollment friction, e.g. creating client certs, and committing them to an authorized certs repo. But for you and some other technical people, that's not a show-stopper.
+
+An API user must:
 - generate a private key and self-signed public certificate e.g. using `openssl`
-- create a git repo for client certs e.g. `github.com/USER/certs-concerto`
+- create a git repo for client certs e.g. `github.com/GHUSER/certs-concerto`
 - commit the PEM file of authorized certs to that git repo
-- provide a cert manifest file for a given API
+- provide a manifest file for a given API e.g. `redishub/manifest.json`
+- in the manifest, specify a role-based access permissions e.g. `admin` role has read-write access to all resources
+- provide a list of certs for each role e.g. `admin.txt`
+
+
+### Certs repo
 
 <img src="https://evanx.github.io/images/rquery/concerto-repo.png">
 
 See example repo: https://github.com/evanx/certs-concerto
 
-The repo contains a `redishub_authorized_certs.cson` manifest:
-```yaml
-spec: 'concerto/manifest#0.2.0'
-certs: [
-  'eowyn-evans-2016-05-01-21h38-36s.cert.pem'
-]
+The repo contains a manifest for my `redishub` service:
+```json
+{
+   "spec": "redishub/manifest#0.3.0",
+   "rolePermissions": {
+      "admin": [{
+          "resource": {"regexp": ".*"},
+          "accessLevel": "admin"
+      }]
+   }
+}```
+where this declares permissions for roles, e.g. for `admin` role.
+
+The certs with the admin role are listed in `admin.txt` as follows:
 ```
-where this lists active certs stored in the repo in PEM format.
+eowyn-evans-2016-05-01-21h38-36s.cert.pem
+```
+where that cert is found in the `certs/` folder.
+
+### Cert gen
 
 We generate a cert file using `openssl` e.g. via the `concerto` bash script:
 ```shell
@@ -43,30 +66,34 @@ https://github.com/evanx/concerto/blob/master/bin/concerto
 
 <img src="https://evanx.github.io/images/rquery/concerto-help.png">
 
-To authenticate API access authorized by a specific Github user, the API service must know:
-- the repo host and user e.g. github.com and the Github user
-- the name of the certs repo e.g. `certs-concerto`
-- the name of a manifest file e.g. `redishub_authorized_certs.cson`
+
+### API integration
 
 The API service:
-- provides a endpoint to import or refresh authorized certs e.g. `/importcerts` from the Github repo
+- provides a endpoint to sync authorized certs from the repo e.g. `/certs-sync`
 - authenticates and authorizes HTTPS client requests according to the authorized certs
 - entrusts Nginx to perform client cert authentication e.g. `ssl_verify_client optional_no_ca`
 - the API service authorizes access according to the client cert of the HTTPS request
 
 When the contents of the certs repo are modified:
-- the user requests the service to refresh certs e.g. `/importcerts`
+- the user requests the service to refresh certs e.g. `/certs-sync`
 - the service will then sync the certs from the git repo to its own cache
 
-Notes:
+
+### Technical notes
+
 - the cert repo can be public since it contains only public certs
 - if a private repo, then add the service's public ssh key as a deployment key
+
+
+### Cost/benefit
 
 Benefits:
 - enables secure API access via client SSL authentication
 - avoids passwords and the usual email verification for lost password recovery
 - enables a minimal service implementation with secure access
 - the same `certs-concerto` repo could include manifest files for different API services
+- the repo provides transparency and versioning of authorized certs
 
 Costs:
 - requiring the cert repo creates signup friction
@@ -78,7 +105,10 @@ The costs must be mitigated as follows:
 - provide a utility to ease cert generation and enrollment for SSL authentication
 - support HTTP-based customer notification e.g. via Slack, Telegram
 
-In the future, we will implement a cert registry service to replace the git-based repo:
+
+### Future plans
+
+We might implement a cert registry service to replace the git-based repo:
 - enable an account to be registered with auto-enrollment of the original client cert
 - add/update certs to the registry via HTTP POST with an authorised "admin" cert
 
