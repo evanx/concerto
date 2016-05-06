@@ -8,11 +8,11 @@ Simple git-based PKI with goals:
 
 ### User story
 
-Say you want to build a cloud-based foundational API, without any bells and whistles. The minimal requirement for the API is that you can use it youself to build apps. You probably want to show it to your friends and colleagues, and let them "signup" to try it out and give you some feedback.
+Say you want to build and deploy a cloud-based API, without any bells and whistles. The initial requirement for the API is that you can use it yourself to build apps. You probably want to show it to your friends and colleagues, and let them "signup" to try it out and give you some feedback.
 
 Months later, you might decide that you want to launch it professionally by building a website with signup, OAuth, email verification, password recovery etc.
 
-With Concerto, you can avoid all that overhead at least initially, to build a "minimum viable" API implementation, that most importantly doesn't compromise on security. It does create some enrollment friction, e.g. creating client certs, and committing them to an authorized certs repo. But for you and some other technical people, that's not a show-stopper.
+With Concerto you can avoid that overhead initially, to build a "minimum viable" API implementation, that most importantly doesn't compromise on security. It does create some enrollment friction e.g. creating client certs and committing them to an authorized certs repo. But for yourself and hopefully some other technical consumers, that's not a show-stopper.
 
 An API user must:
 - generate a private key and self-signed public certificate e.g. using `openssl`
