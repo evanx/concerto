@@ -52,6 +52,7 @@ where this declares permissions for roles, e.g. for `admin` role.
 The certs with the admin role are listed in `admin.txt` as follows:
 ```
 eowyn-evans-2016-05-01-21h38-36s.cert.pem
+eowyn-evans-2016-05-05-18h34-56s.cert.pem
 ```
 where that cert is found in the `certs/` folder.
 
