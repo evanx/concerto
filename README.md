@@ -65,6 +65,7 @@ We generate a cert file using `openssl` e.g. via the `concerto` bash script:
 ```shell
 evans@eowyn:~/concerto$ bin/concerto gen
 ```
+where a default X509 subject, also used for the PEM file name, will be generated:
 ```
 Generating a 2048 bit RSA private key
 writing new private key to 'eowyn-evans-2016-05-02-04h55-22s.privkey.pem'
@@ -74,6 +75,11 @@ writing new private key to 'eowyn-evans-2016-05-02-04h55-22s.privkey.pem'
 where the issuer and subject are the same since it is self-signed.
 
 Note that a default cert `id` is chosen according the hostname, user and timestamp. This `CN` is defaulted to this `id.` Since we might prefer this information to be private. Therefore private repos must be supported, with access granted to the service's ssh key.
+
+We can choose a `id` as follows:
+```shell
+evans@eowyn:~/concerto$ id=mycert bin/concerto gen
+```
 
 See the `bin/concerto` bash util script:
 https://github.com/evanx/concerto/blob/master/bin/concerto

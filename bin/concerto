@@ -43,8 +43,7 @@ fi
 c0gen() { # generate a timestamped cert in $priv/tmp
   carg $# gen
   cd $priv/tmp
-  cn=${cn:=$id}
-  subj=${subj:=\/CN=$cn}
+  subj=${subj:=\/CN=$id}
   headline $id $subj
   openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj "$subj" -out $id.cert.pem -keyout $id.privkey.pem | grep '^\w'
   headline $id.cert.pem
