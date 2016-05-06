@@ -54,7 +54,7 @@ The certs with the admin role are listed in `admin.txt` as follows:
 eowyn-evans-2016-05-01-21h38-36s.cert.pem
 eowyn-evans-2016-05-05-18h34-56s.cert.pem
 ```
-where that cert is found in the `certs/` folder.
+where these certs are found in the `certs/` folder of the repo.
 
 Find an empty sample manifest for my `redishub.com` service at:
 https://github.com/evanx/concerto/blob/master/sample/redishub/manifest.json
