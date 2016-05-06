@@ -56,7 +56,7 @@ eowyn-evans-2016-05-05-18h34-56s.cert.pem
 ```
 where these certs are found in the `certs/` folder of the repo.
 
-Find an empty sample manifest for my `redishub.com` service at:
+See an empty sample manifest for my `redishub.com` service:
 https://github.com/evanx/concerto/blob/master/sample/redishub/manifest.json
 
 ### Cert gen
